@@ -1,62 +1,106 @@
 const caixaPrincipal = document.querySelector(".caixa-principal");
-const caixaPerguntas = document.querySelector(".caixa-perguntas");
-const caixaAltermativas = document.querySelector(".caixa-alternativas");
+const caixaPerguntas = document.querySelector(".caixa-pergunta");
+const caixaAlternativas = document.querySelector(".caixa-alternativas");
 const caixaResultados = document.querySelector(".caixa-resultados");
 const textoResultados = document.querySelector(".texto-resultados");
 
 const perguntas = [
-    {
-        enunciado: "Assim que saiu da escola Gabriel se depara com uma nova tecnologia, um chat que consegue responder todas as dúvidas que uma pessoa pode ter, o chat também gera imagens e áudios hiper-realistas. Qual o primeiro pensamento de Gabriel?",
-       
-        alternativas: [
-        "isso é assustador!",
-        "isso é maravilhoso!"
-        ]
+{
+enunciado: "Qual foi o campeão da copa do mundo de 2014?",
+alternativas: [
+{
+texto:"Argentina.",
+afirmacao:"afirmação"
+},
+{
+texto:"Alemanha.",
+afirmacao:"afirmação."
 
-    },
-    {
-        enunciado: "Com a descoberta desta tecnologia uma professora de tecnologia da escola decidiu fazer uma sequência de aulas sobre IA. No fim de uma aula ela pede que Gabriel escreva um trabalho sobre o uso de tecnologia em sala de aula. Qual atitude Gabriel toma?",
-        
-        alternativas: [
-        "Utiliza uma ferramenta de busca na internet que utiliza IA para que ela ajude a encontrar informações relevantes para o trabalho e explique numa linguagem que facilite o entendimento.",
-        "Escreve o trabalho com base nas conversas que teve com colegas, algumas pesquisas na internet e conhecimentos próprios sobre o tema."
-        ]
-    },
-    {
-        enunciado: "Depois que Gabriel escreveu o trabalho, teve uma discussão sobre o impacto da IA no trabalho do futuro o que Gabriel faz:",
-        
-        alternativas: [
-        "Defende a ideia de que a IA pode criar novas oportunidades de emprego e melhorar habilidades humanas",
-        "Me preocupo com as pessoas que perderão seus empregos para máquinas e defendem a importância de proteger os trabalhadores."
-        ]
-    },
-    {
-        enunciado: "Ao final da discussão, Gabriel precisou criar uma imagem no computador que representasse o que pensa sobre IA. E agora?",
-        
-        alternativas: [
-        "Criar uma imagem utilizando um gerador de imagem de IA.",
-        "Criar uma imagem utilizando uma plataforma de design como o Paint."
-        ]
-    }
+}
+]
+
+},
+{
+enunciado: "qual time é o maior do sul?",
+alternativas: [
+{
+texto:"Grêmio",
+afirmacao:"afirmação"
+},
+{
+texto:"Internacional",
+afirmacao:"afirmação."
+
+}
+]
+
+},
+{
+enunciado: "Qual time mais tem titulos no Brasil.",
+alternativas: [
+{
+texto:"Flamengo, Grêmio, Palmeiras .",
+afirmacao:"afirmação"
+},
+{
+texto:"Argentina, Internacional, Vasco.",
+afirmacao:"afirmação."
+
+}
+]
+
+
+},
+{
+enunciado: "Qual foi a primeira seleção campeã da copa do mundo?",
+alternativas: [
+{
+texto:"Italia.",
+afirmacao:"afirmação"
+},
+{
+texto:"uruguai.",
+afirmacao:"afirmação"
+
+}
+]
+
+}
 
 ];
 
 let atual = 0;
 let perguntaAtual;
+let historiaFinal = "";
 
-function mostraPergonta() {
-    perguntaatual = perguntas[atual]
-    caixaPerguntas.textContent = perguntaAtual.enunciado;
-    mostraAlternativas();
-
+function mostraPergunta() {
+if(atual >= perguntas.length){
+mostraResultado();
+return
+}
+perguntaAtual = perguntas[atual];
+caixaPerguntas.textContent = perguntaAtual.enunciado;
+caixaAlternativas.textContent = "";
+mostraAlternativas();
 }
 
-function mostraAlternativas() {
-    for(const alternativa of perguntaAtual.alternativas){
-        const botaoAlternativas = document.createElement("button")
-        botaoAlternativas.textContent = alternativa;
-        caixaAltermativas.appendChild(botaoAlternativas);
-    }
+function mostraAlternativas(){
+for(const alternativa of perguntaAtual.alternativas){
+const botaoAlternativas = document.createElement("button");
+botaoAlternativas.textContent = alternativa.texto;
+botaoAlternativas.addEventListener("click",() => respostaSelecionada(alternativa));
+caixaAlternativas.appendChild(botaoAlternativas);
+}
 }
 
-mostraPergonta();
+function respostaSelecionada(opcaoSelecionada){
+atual++;
+mostraPergunta();
+const afirmacoes = opcaoSelecionada
+}
+function mostraResultado(){
+caixaPerguntas.textContent = "Futebol é conciderado como um instrumento de socialização. Além disso, é considerado um instrumento de relacionamento social extremamente valioso que permite ao praticante revelar suas intenções, expressar seus sentimentos, construindo estratégias e criando códigos para que possam atingir os objetivos.";
+textoResultados.textContent = historiaFinal += afirmacoes + " ";
+caixaAlternativas.textContent = "";
+}
+mostraPergunta();
